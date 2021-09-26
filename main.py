@@ -1,9 +1,9 @@
 from cryptography.fernet import Fernet
 from replit import db
 import os
-from flask import Flask
+from flask import Flask, render_template, request
 
-app = Flask('app')
+app = Flask(__name__,template_folder='templates', static_folder='static')
 
 def fetch_new_key():
   key = Fernet.generate_key()
@@ -28,13 +28,23 @@ def fetch_from_db(name):
 
 @app.route('/')
 def hello_world():
-  return 'Hello, World!'
+  return render_template('login.html')
 
-@app.route('/login')
-def login():
-  return 'login'
+@app.route('/', methods = ['POST'])
+def hello_world_post():
+  username = request.form['username']
+  password = request.form['password']
+  print(username, password)
+  if db[username] == password:
+    print('you\'re in')
+  return render_template('login.html')
 
-@app.route('/signup'):
+@app.route('/doc', methods = ['POST'])
+def doc():
+  
+  return 'doc'
+
+@app.route('/signup')
 def signup():
   return 'signup'
 
@@ -49,4 +59,5 @@ token = encrypt_data('hello world')
 print(token)
 print(decrypt_token(token))
 
-app.run(host='0.0.0.0', port=8080)
+if __name__ == '__main__':
+  app.run(host='0.0.0.0', debug=True, port=5000)
