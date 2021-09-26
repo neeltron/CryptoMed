@@ -1,12 +1,21 @@
 from cryptography.fernet import Fernet
+import os
 
-key = Fernet.generate_key()
-print(key)
+def fetch_new_key():
+  key = Fernet.generate_key()
+  return key
 
-key = 'BDst0ZW7Qfbw_ntcJaQgnse-lNgiczBq7Cjz8OwX4gc='
+def encrypt_data(data):
+  token = f.encrypt(b''+bytes(data, 'utf-8'))
+  return token
 
+def decrypt_token(token):
+  dec = f.decrypt(token)
+  return dec
+
+key = os.environ['key']
 f = Fernet(key)
 
-token = f.encrypt(b'hello world')
+token = encrypt_data('hello world')
 print(token)
-print(f.decrypt(token))
+print(decrypt_token(token))
