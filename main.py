@@ -30,6 +30,18 @@ def fetch_from_db(name):
 def hello_world():
   return 'Hello, World!'
 
+@app.route('/login')
+def login():
+  return 'login'
+
+@app.route('/signup'):
+def signup():
+  return 'signup'
+
+@app.route('/history_and_prescription')
+def prescrip():
+  return 'history and prescription'
+
 key = os.environ['key']
 f = Fernet(key)
 
