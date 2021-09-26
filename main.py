@@ -65,7 +65,7 @@ def doc_push():
   enc = encrypt_data(data_to_encrypt)
   # print(str(enc))
   push_to_db(name, str(enc))
-  return 'doc'
+  return redirect(url_for('hello_world'))
 
 @app.route('/signup')
 def signup():
