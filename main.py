@@ -39,9 +39,20 @@ def hello_world_post():
     print('you\'re in')
   return render_template('login.html')
 
-@app.route('/doc', methods = ['POST'])
+@app.route('/doc')
 def doc():
-  
+  return render_template('doc.html')
+
+@app.route('/doc', methods = ['POST'])
+def doc_push():
+  name = request.form['patient']
+  history = request.form['history']
+  prescription = request.form['prescription']
+  data_to_encrypt = history + "\n" + prescription
+  print(data_to_encrypt)
+  enc = encrypt_data(data_to_encrypt)
+  print(str(enc))
+  push_to_db(name, str(enc))
   return 'doc'
 
 @app.route('/signup')
