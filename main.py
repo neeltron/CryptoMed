@@ -17,6 +17,7 @@ def fetch_new_key():
 
 def encrypt_data(data):
   token = f.encrypt(b''+bytes(data, 'utf-8'))
+  # print(str(token))
   return token
 
 def decrypt_token(token):
@@ -24,12 +25,16 @@ def decrypt_token(token):
   return dec
 
 def push_to_db(name, data):
-  db[name] = data
+  db[name+'o'] = data
   return "Pushed to database successfully"
 
 def fetch_from_db(name):
-  data = db[name]
-  decrypted_data = decrypt_token(data)
+  data = db[name+'o']
+  # print(data[2:-1])
+  token = bytes(data[2:-1], 'utf-8')
+  print(token)
+  decrypted_data = f.decrypt(token).decode('utf-8')
+  # print(decrypted_data)
   return decrypted_data
 
 @app.route('/')
@@ -40,10 +45,10 @@ def hello_world():
 def hello_world_post():
   username = request.form['username']
   password = request.form['password']
-  print(username, password)
+  # print(username, password)
   if db[username] == password:
     session['name'] = username
-    print('you\'re in')
+    # print('you\'re in')
     return redirect(url_for('prescrip'))
 
 @app.route('/doc')
@@ -56,9 +61,9 @@ def doc_push():
   history = request.form['history']
   prescription = request.form['prescription']
   data_to_encrypt = history + "\n" + prescription
-  print(data_to_encrypt)
+  # print(data_to_encrypt)
   enc = encrypt_data(data_to_encrypt)
-  print(str(enc))
+  # print(str(enc))
   push_to_db(name, str(enc))
   return 'doc'
 
@@ -69,15 +74,18 @@ def signup():
 @app.route('/history_and_prescription')
 def prescrip():
   name = session['name']
-  print(name)
-  return render_template('patient.html')
+  # print(name)
+  history = fetch_from_db(name)
+  print(history)
+  data = [name, history]
+  return render_template('patient.html', data = data)
 
 key = os.environ['key']
 f = Fernet(key)
 
 token = encrypt_data('hello world')
-print(token)
-print(decrypt_token(token))
+# print(token)
+# print(decrypt_token(token))
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', debug=True, port=5000)

@@ -4,9 +4,8 @@
   </head>
   <body>
     <form method = "post">
-      <input name = "patient" disabled>
-      <textarea name = "history" disabled></textarea>
-      <textarea name = "prescription" disabled></textarea>
+      <input name = "patient" value = {{ data[0] }} disabled>
+      <textarea name = "history" disabled>{{ data[1] }}</textarea>
     </form>
   </body>
 </html>
