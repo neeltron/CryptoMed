@@ -1,8 +1,12 @@
-from flask import Flask
-app = Flask('app')
+from cryptography.fernet import Fernet
 
-@app.route('/')
-def hello_world():
-  return 'Hello, World!'
+key = Fernet.generate_key()
+print(key)
 
-app.run(host='0.0.0.0', port=8080)
+key = 'BDst0ZW7Qfbw_ntcJaQgnse-lNgiczBq7Cjz8OwX4gc='
+
+f = Fernet(key)
+
+token = f.encrypt(b'hello world')
+print(token)
+print(f.decrypt(token))
