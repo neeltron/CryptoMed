@@ -1,4 +1,5 @@
 from cryptography.fernet import Fernet
+from replit import db
 import os
 
 def fetch_new_key():
@@ -12,6 +13,15 @@ def encrypt_data(data):
 def decrypt_token(token):
   dec = f.decrypt(token)
   return dec
+
+def push_to_db(name, data):
+  db[name] = data
+  return "Pushed to database successfully"
+
+def fetch_from_db(name):
+  data = db[name]
+  decrypted_data = decrypt_token(data)
+  return decrypted_data
 
 key = os.environ['key']
 f = Fernet(key)
