@@ -40,6 +40,14 @@ tests = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)"
 tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0)", "six", "mypy", "pytest-mypy-plugins"]
 
 [[package]]
+name = "cachelib"
+version = "0.3.0"
+description = "A collection of cache libraries in the same API interface."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "certifi"
 version = "2021.5.30"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -144,6 +152,18 @@ Werkzeug = ">=2.0"
 [package.extras]
 async = ["asgiref (>=3.2)"]
 dotenv = ["python-dotenv"]
+
+[[package]]
+name = "flask-session"
+version = "0.4.0"
+description = "Adds server-side session support to your Flask application"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+cachelib = "*"
+Flask = ">=0.8"
 
 [[package]]
 name = "idna"
@@ -310,7 +330,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "1e14c594356b13e39ca0b72b9696c00ecad5ee60331e8bd04ad71981631193af"
+content-hash = "9303b69ec28e55f073516ca4c4bda79bc367788c6cacf1824fa29a547b644ae7"
 
 [metadata.files]
 aiohttp = [
@@ -359,6 +379,10 @@ async-timeout = [
 attrs = [
     {file = "attrs-21.2.0-py2.py3-none-any.whl", hash = "sha256:149e90d6d8ac20db7a955ad60cf0e6881a3f20d37096140088356da6c716b0b1"},
     {file = "attrs-21.2.0.tar.gz", hash = "sha256:ef6aaac3ca6cd92904cdd0d83f629a15f18053ec84e6432106f7a4d04ae4f5fb"},
+]
+cachelib = [
+    {file = "cachelib-0.3.0-py3-none-any.whl", hash = "sha256:2d636c61a45cbcef74f7e6d688badf9a0c9141ece08d2e4e45c4326b3daf8637"},
+    {file = "cachelib-0.3.0.tar.gz", hash = "sha256:cc1856259f102c9273efa342100f70d9fafbd07b41ce05c501ee28e1dbbb5133"},
 ]
 certifi = [
     {file = "certifi-2021.5.30-py2.py3-none-any.whl", hash = "sha256:50b1e4f8446b06f41be7dd6338db18e0990601dce795c2b1686458aa7e8fa7d8"},
@@ -455,6 +479,10 @@ cryptography318 = [
 flask = [
     {file = "Flask-2.0.1-py3-none-any.whl", hash = "sha256:a6209ca15eb63fc9385f38e452704113d679511d9574d09b2cf9183ae7d20dc9"},
     {file = "Flask-2.0.1.tar.gz", hash = "sha256:1c4c257b1892aec1398784c63791cbaa43062f1f7aeb555c4da961b20ee68f55"},
+]
+flask-session = [
+    {file = "Flask-Session-0.4.0.tar.gz", hash = "sha256:c9ed54321fa8c4ca0132ffd3369582759eda7252fb4b3bee480e690d1ba41f46"},
+    {file = "Flask_Session-0.4.0-py2.py3-none-any.whl", hash = "sha256:1e3f8a317005db72c831f85d884a5a9d23145f256c730d80b325a3150a22c3db"},
 ]
 idna = [
     {file = "idna-3.2-py3-none-any.whl", hash = "sha256:14475042e284991034cb48e06f6851428fb14c4dc953acd9be9a5e95c7b6dd7a"},

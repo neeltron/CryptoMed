@@ -10,6 +10,7 @@ Flask = "^2.0.1"
 cryptography318 = "^0.1.8"
 cryptography = "^3.4.8"
 replit = "^3.2.4"
+Flask-Session = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 
